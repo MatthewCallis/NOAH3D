@@ -1,0 +1,6 @@
+name maptrace
+file maptrace
+file cmdlib
+file tedmaps
+option stack=32768
+

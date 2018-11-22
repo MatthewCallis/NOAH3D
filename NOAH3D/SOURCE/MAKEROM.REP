@@ -1,0 +1,10 @@
+f0
+ldemo1.bin,,,0E000,,nv
+ldemo2.bin,,,0F000,,nv
+lscalers.bin,,,10000,,nv
+lextdata.bin,,,20000,,nv
+lnoah.hex,,,,,nv
+wNOAH.BIN,,,r
+qn
+
+

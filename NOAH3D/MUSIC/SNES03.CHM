@@ -1,0 +1,44 @@
+#
+# NORMAL.CHM - Channel mapping file.
+# *.CHM files are used to control which voices on the FM card may be used
+# by notes from different MIDI channels. This allows for fine grained
+# control over how note overrun is handled. This only applies when using
+# the /DYNAMIC switch.
+#
+# Each line takes the form: <Channel> <Map>
+#
+# <Channel> is the MIDI channel being modified.
+#
+# <Map> can be in the form @?????????, where each of the ?'s represents one
+# of the channels, and is '1' if it's ok to use the voice for notes coming
+# from the current channel, or '0' if it's not ok.
+# You can also use the form "<range> ...", where <range> is either a voice
+# (specified by it's number) or a range of voices (specified by N-N).
+#
+# Example 1:
+# 1 @111000000
+# This would allow notes from MIDI channel 1 to play only on voices 1-3.
+#
+# Example 2:
+# 4 1-3 5 8-9
+# This would allow notes from MIDI channel 4 to play only on voices 1,2,3,5,
+# 8, and 9.
+#
+# By default, notes from all MIDI channels can play on any voice.
+#
+1  1-6
+2  1-6
+3  1-6
+4  1-6
+5  1-6
+6  1-6
+7  1-6
+8  1-6
+9  1-6
+10 1-6
+11 1-6
+12 1-6
+13 1-6
+14 1-6
+15 1-6
+16 1-6

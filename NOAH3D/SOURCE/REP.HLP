@@ -1,0 +1,460 @@
+#elp
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+   Welcome to the RomEm(R) PLUS Interactive Help Facility       Version 2.6
+
+   At any command prompt you may type:  h <cmdltr>   to obtain help 
+   with a particular command, for example:  h l for help on load.
+
+    SETUP Commands                    EDIT Commands
+     p   Port, select printer port     f   Fill emulator memory
+     t   Type, defines EPROM type      e   Edit emulator memory
+     u   Unit, selects emulator unit   d   Display emulator memory
+                                       s   Sum, display checksum
+    FILE Commands    
+     l   Load a file into emulator    FEATURE Commands
+     w   Write memory to a file        c   Compare address               
+     @   Run commands from a file      m   Monitors features
+     q   Quit this program             a   Activate a feature
+                                       r   Reset, set/clear Reset clip
+    MISC Commands
+     k   Define function key macros   !   Run DOS or DOS command
+     =   Calculator                   ?   Display configuration         
+
+  Quick steps to using RomEm follow...
+#
+
+  STEP 1 - If you are not using LPT1, select the parallel port 
+           that RomEm is connected to with the p (port) command.
+           Example:  p 2     to use LPT2
+
+  STEP 2 - RomEm is normally configured as Unit 0.  If you are using 
+           more than one RomEm unit, use the u (unit) command to define the 
+           unit number as selected by the DIP switches on the back panel.
+           Example:  u 1     to select unit 1
+
+  STEP 3 - Define the type of EPROM you are emulating.  THIS IS REQUIRED.
+           Example:  t 27256    to emulate a 27256 device.
+
+  STEP 4 - Load your file using the l (load) command.
+           Example:  l test.hex
+
+  RomEm is now loaded and ready to go.  It is always in emulation mode
+  except when you execute a command which needs to access RomEm memory.
+
+  STEP 5 - Quit to DOS using the q command.
+ 
+  More advanced information on RomEm software follows...
+#
+
+  For Calculator and Value Conversions, use the = command  
+    Value arguments can be hex, decimal, or ASCII.  Hex is the default.
+    Decimal arguments are preceeded by a "#", and ASCII values are
+    preceeded by an apostrophe " ' ".  Example:   41 = #65 = 'A
+
+  RomEm loads files in binary, Intel Hex, and Motorola S formats.
+    The l (load) command automatically senses the type of file.  
+    The w (write) command can also write any type of file.
+    This makes conversions between file types possible.  
+
+  Use the r command to control the Reset test clip.
+    This output can be normally high, low, or high-Z.
+
+  See the manual for more detailed information on all RomEm commands.
+
+#a
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  a (Activate) Activate a feature for the current emulator unit.
+
+  Format:      a <keyword>
+
+  Arguments:   <keyword> specifies which feature is to be
+               activated for the current unit:
+               'c' activates address compare
+               't' activates trigger watch
+               's' activates address snapshot
+
+               Omitting <keyword> causes all features to be
+               deactivated for the current unit.
+
+               To monitor active features, use the 'm' command.
+#c
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  c (Compare)  Set current emulator unit's compare address and activate
+               the address compare feature for this unit.
+
+  Format:      c <value>
+
+  Arguments:   <value> is the address
+
+               To monitor active features, use the 'm' command.
+
+  Example:
+
+  c 034b       Set the compare address to hex 034b, and activate the
+               compare feature for the current unit.
+#d
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  d (Display)  Display data from the current RomEm's memory.
+
+  Format:      d <start-value>,<length-value>,<width-value>
+
+  Arguments:   All arguments are optional.
+
+               <start-value> is the offset of the first byte to be displayed.
+               Default is the next byte after the most recent 'd' command.
+
+               <length-value> is the number of bytes to be displayed.
+               Default is #128.
+
+               <width-value> is the number of bytes to display on each line.
+
+               For long displays, press Control-S to temporarily suspend
+               the display, or Control-C to cancel the display.
+#e
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  e (Edit)     Edit data in the current RomEm's memory.
+
+  Format:      e <start-value>,<data-value OR data-string>,...
+
+  Arguments:   <start-value> is the offset of the first byte to be entered.
+               Default is the next byte after the most recent 'd' command.
+
+               If no data arguments follow, an byte by byte interactive
+               editing mode begins.  The current value is displayed in
+               hex, and a new value can be entered in hex, decimal
+               (preceeded by a "#"), or ASCII (preceeded by a " ' ").
+               Space moves on the the next byte, Esc ends editing.
+
+               If <data-value> (preceeded by " ' ") or <data-string>
+               (enclosed in quotes) arguments are given, the values
+               are inserted into successive memory locations beginning
+               at <start-value>.
+#f
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  f (Fill)     Fill all or a portion of the current RomEm's memory.
+
+  Format:      f <fill-value>,<start-value>,<length-value>,<verify-option>
+
+  Arguments:   <fill-value> is required and must be in the range 0 - ff.
+
+               <start-value> is optional and specifies the offset with
+               the emulated ROM where filling is to start.  Default is 0.
+
+               <length value> is optional and specifies the number of
+               bytes to be filled.  The default is the rest of the
+               defined ROM.
+
+               <verify-option>  v  = load with verify (default)
+                                nv = load without verify
+                                vo = verify only
+#l
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  l (Load)     Load the current RomEm's memory from a file.
+
+  Format:      l <filename>,<start-value>,<length-value>,
+                      <target-value>,<width-value>,<verify-option>
+
+  Arguments:   If no arguments are given, defaults are taken from the
+               configuration file for the current port and unit.
+
+               <filename> gives the drive/path/name of an Extended
+               Intel hex, Motorola S, or binary file to be loaded.
+
+               The remaining arguments are used to select exactly what
+               from the file is loaded where.  See the RomEm Operator's
+               Manual for a more detailed discussion.
+
+               <verify-option>  v  = load with verify (default)
+                                nv = load without verify
+                                vo = verify only
+#m
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  m (Monitor)  Monitor all active features.
+
+  Format:      m <keyword>
+
+  Arguments:   <keyword> can be:  '1' for one shot mode, and/or
+                                  'q' for quiet mode (supress beeps).
+               If no arguments are given, defaults are taken from the
+               configuration file for the current port and unit.
+
+               At least one feature must be active.  Features are
+               activated with the 'a' or 'c' command.
+#p
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  p (Port)     Select parallel port for subsequent operations.
+
+  Format:      p <value>,[<type> or <delay>]
+
+  Arguments:   The <value> is required and must be 1, 2, 3, 4 to specify
+               LPT1, LPT2, LPT3, or LPT4 as defined in the ROM BIOS port
+               address table.
+
+               A <value> of 0 will instruct the software to use your PC's
+               memory instead of RomEm memory.  This is useful for 
+               demonstration purposes, or to perform file conversions.
+ 
+               A <value> of '?' will scan all parallel ports for attached
+               RomEm units and display its findings.
+
+               <delay> the amount of delay used when writing to RomEm.
+               The default is 2.  Try 1 or 0 for faster downloads, or 
+               3 or 4 if you have errors when loading RomEm.
+
+               <type> is valid for port 0 and specifies the type of memory. 
+
+               The RomEm prompt will change to reflect the new port number.
+               If a unit is not currently defined on the new port, you
+               must first do so by using the 't' command.
+#r
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  r (Reset)    Pulse the Reset output, or set it to a steady state.
+
+  Format:      r <keyword>
+
+  Arguments:   The <keyword> is one or two letters to specify the normal
+               (inactive) and asserted (active) states of the Reset signal.
+
+               The allowable letters are "H" for HIGH (+5v), "L" for LOW
+               (0v,ground), or "Z" for HIGH-IMPEDANCE.  This command causes
+               the Reset output to be set into the given inactive state.
+
+               Allowable two-letter combinations are:
+
+                  HL      HZ      LH      LZ      ZH      ZL
+
+               Allowable one-letter keywords are:
+
+                  L (same as LH)
+                  H (same as HL)
+                  Z (same as ZL)
+
+               If <keyword> is omitted, the Reset output is pulsed to its
+               active state for 100 to 150 milliseconds.
+#s
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  s (Sum)      Display the 32 bit checksum of the current emulator's
+               memory.
+
+  Format:      s <start-value>,<length-value>
+
+  Arguments:   Both arguments are optional and specify the starting
+               address and the number of bytes to be included in the
+               checksum.  The <start-value> defualt is 0, and the
+               <length-value> default is the rest of the defined size
+               of the memory.
+#t
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  t (Type)     Define type of EPROM / ROM to be emulated on the current
+               port and unit.
+
+  Format:      t <keyword>,<fold-type>
+
+  Arguments:   Keywords are EPROM parts number with the '27' prefix optional,
+               or ROM byte sizes in hex or decimal.  Allowable keywords are:
+                     2716    16    2048     800    2K
+                     2732    32    4096    1000    4K
+                     2764    64    8192    2000    8K
+                    27128   128   16384    4000   16K
+                    27256   256   32768    8000   32K
+                    27512   512   65536   10000   64K
+                    27010   010  131072   20000  128K
+                    27020   020  262144   40000  256K
+                    27040   040  524288   80000  512K
+                    27080   080 1048576  100000 1024K
+
+               The <keyword> is optional if the type for the current
+               port and unit has already been defined by a previous 't'
+               command or in the default configuration.
+#
+
+               <fold-type> is pf (partial) by default.  Other types are
+               nf (none) and ff (full).
+
+               Execution of the 't' command causes a "quick test" to be
+               run on the current unit.  If it fails, the current unit
+               information is taken out of the configuration.
+
+               The special keyword '-' causes the EPROM type for the current
+               unit to become undefined.  This may be used to remove units
+               that are no longer used from the user's stored configuration.
+#u
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  u (Unit)     Select emulator unit (on current port) to be used for
+               subsequent operations.
+
+  Format:      u <value>
+
+  Arguments:   The <value> is required and must be 0, 1, 2, 3, or a 
+               combination of up to 4 different numbers.  This number
+               must correspond to the unit DIP switches on RomEm.
+               
+               A <value> which is a combination of numbers such as u01,
+               u10, u0123, etc., is used to indicate that data should be
+               interleaved between the chosen unit numbers.  This is for
+               16 or 32 bit wide systems.
+
+               The RomEm prompt will change to reflect the new unit number.
+
+               If the unit is not currently defined on the port, you
+               must first do so by using the 't' command.
+#w
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  w (Write)    Write a binary image of current emulator's memory to a file.
+
+  Format:      w <filename>,<start-value>,<length-value>,<mode>,
+                 <type>,<rec-length>,<fill>,<target>,<entry>,<signon>
+
+  Arguments:   <filename> is required and specifies the file to be
+               written to.  All other arguments are optional.
+
+               <start-value> and <length-value> define the portion
+               of the emulator memory that is to be written.
+
+               <mode> can be "r" to replace and exising file, "a" to
+               append, "c" to cancel if the file exists.
+
+               <type> can be "b" for binary (default), "h" for Intel
+               extended HEX, "s" for Motorola S format.  See the RomEm
+               manual for variations on these types.
+
+ More w (Write) command options follow...
+#
+
+               <rec-length> is the maximum number of bytes per record
+
+               <fill> is the fill value
+
+               <target> is the address of the first output data byte
+               in the output file.  <start-value> is the default
+
+               <entry> is the point address that is to be stored into 
+               the formatted file, if any.  For Intel HEX, this is in
+               a 'start address record', and for Motorola S, this is
+               in a the EOF record.
+
+               <signon> is for Motorola S only and causes a signon
+               record to be generated with the given text.
+
+           
+#z
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  z            Deactivate all features for all units.
+
+  Format:      z
+
+  Arguments:   None.
+
+               This command is useful when more than one unit is defined.
+               It will deactivate features for all currently defined units.
+#@
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  @            Proceed by taking commands from a given file.
+
+  Format:      @ <filename>,<keyword>
+
+  Arguments:   The <filename> is required and must be an ASCII text file.
+
+               The <keyword> is optional and allows control over what
+               is displayed on the screen as commands are processed.
+               "v" - display all normal progress reports,
+               "q" - supress progress reports,
+               "e" - echo command lines in the normal way,
+               "n" = supress command line echo.
+#!
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  !            Run a DOS command, or exit to DOS and remain resident.
+
+  Format:      ! [command]
+
+  Arguments:   None.
+
+               If nothing follows the "!" on the command line, DOS is
+               invoked in interactive mode.  Entering "exit" will
+               immediately return to RomEm control software.
+
+               If anything follows "!" on the same line, it is treated
+               as a single DOS command, e.g. !dir.  Processing continues
+               after DOS processes the command.
+#q
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  q (Quit)     Quit RomEm software, leaving all units in emulation mode.
+
+  Format:      q <keyword>
+
+  Arguments:   The <keyword> is optional and can be "y" to automatically
+               update the configuration file, or "n" to make no changes
+               to the configuration.  The default is to ask the operator
+               whether or not to save the configuration.
+
+               NOTE:  RomEm software cannot be re-entered without taking
+               the current unit out of emulation mode.  Use the ! command
+               to exit and return to RomEm software without disturbing
+               the RomEm units.
+#k
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  k (Key)      Display or define function Key macros.
+
+  Format:      k <key>,<command-string>
+
+  Arguments:   The <key> can be 1 through 10 to specify F1 through F10.
+
+               The <command-string> is a list of RomEm commands (enclosed
+               in quotes) to be executed with the selected function key.
+
+               An automatic return in signified by a "\r" at the end of
+               the string. If the first item in the string is "\r", then
+               arguments typed on the command line before pressing the
+               function key will be used in function key expansion, in
+               place of "%0" through "%9".
+
+               If the k command is invoked with no arguments, a list of
+               the currently defined function keys is displayed.  If only
+               a <key> argument is supplied, the macro for that function
+               is deleted (factory supplied macros cannot be deleted).
+#
+  Examples:
+  k
+    Display currently defined function keys.
+
+  k 9
+    Delete definition for function key F9.
+
+  k 5,"t2764 fff\r"
+    Sets function key F5 to define RAM as a 2764, then fill all locations
+    with ff hex.
+
+  k 6,"la:myfile.bin\r"
+    Sets F6 to load a file named myfile.bin from drive a:.
+
+  k 7,"\rld:\\assembly\\%0.hex\r"
+    This will set F7 to load a hex file from the 'assembly' directory on
+    drive d:.  Note:  a single backslash must be specified with two, since
+    the backslash character has special meaning in string arguments.
+    To use this macro, type the name of the file (without .hex extension),
+    then press F7.
+#=
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  =            This command provides a convenient means of computing values
+               in hex, decimal, or ASCII
+
+  Format:      =<value>,<value>,...
+
+  Arguments:   The <value> is any valid value argument.  Plus (+) and
+               minus (-) operators are permitted.  Results are displayed
+               in hex, decimal, and ASCII
+
+  Example:
+
+  =13CF+#44,48-'e
+
+  produces the following output:  13CF-#44 = 13FB     = #5115
+                                  48-'e    = FFFFFFE3 = #-29
+#?
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+  ?            Display current configuartion and environment information.
+
+  Format:      ?
+
+  Arguments:   None.
+

@@ -1,0 +1,1 @@
+ case onrdummy DATA ENDromlink DATAsintable gequ $c20000costable gequ $c20080tangents gequ $c20100scaleatz gequ $c27100palette gequ $c2f100ptiles gequ $c30000psprites gequ $c30e20backgrnd gequ $c34e20scalers gequ $c37120 END

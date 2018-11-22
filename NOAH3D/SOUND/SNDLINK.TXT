@@ -1,0 +1,45 @@
+$STATIC
+goddbd- $1270
+goodsne- $FE0
+chihat- $F80
+org- $6D0
+oboe- $660
+panflte- $350
+trnpt- $4D0
+hbass- $1780
+d_gunsht
+d_edie
+d_opendr
+d_pain
+d_mstep
+d_sheep
+d_goat
+d_ostrch
+d_ox
+d_antlpe
+d_gatlin
+d_spit
+d_eat
+d_dbite
+$SHARED
+d_closdr
+d_sling2
+d_bonus
+d_knife
+d_watthr
+d_wathit
+d_cocthr
+d_cochit
+d_pwall
+d_extra
+d_pdie
+d_camel
+d_girafe
+d_monkey
+d_kangro
+d_elphnt
+d_bear
+d_inc
+d_key
+d_push
+

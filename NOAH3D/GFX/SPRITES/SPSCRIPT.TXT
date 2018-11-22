@@ -1,0 +1,259 @@
+
+$load   miss1.lbm
+missile         1
+missboom        2
+gameover        3
+enmissile       4
+fireball        5
+fireboom        6
+needle          7
+victory         8
+
+$load   dk_atk.lbm
+dknight_atk1    1
+dknight_atk2    2
+dknight_atk3    3
+dknight_atk4    4
+dknight_sleep	5
+
+$load   dk_wlk.lbm
+dknight_wlk1    1
+dknight_wlk2    2
+dknight_wlk3    3
+dknight_wlk4    4
+
+dknight_dth1    6
+dknight_dth2    7
+dknight_dth3    8
+
+$load   rat_atk.lbm
+dog_atk1        1
+dog_atk2        2
+dog_atk3        3
+dog_sleep	5
+
+$load   rat_wlk.lbm
+dog_wlk1        1
+dog_wlk2        2
+dog_wlk3        3
+dog_wlk4        4
+
+dog_dth1        6
+dog_dth2        7
+dog_dth3        8
+
+$load   grd_atk.lbm
+guard_atk1      1
+guard_atk2      2
+guard_atk3      3
+guard_sleep	5
+
+$load   grd_wlk.lbm
+guard_wlk1      1
+guard_wlk2      2
+guard_wlk3      3
+guard_wlk4      4
+guard_pain      5
+
+guard_dth1      6
+guard_dth2      7
+guard_dth3      8
+
+$load   hans_atk.lbm
+hans_atk1       1
+hans_atk2       2
+hans_atk3       3
+hans_sleep	5
+
+$load   hans_wlk.lbm
+hans_wlk1       1
+hans_wlk2       2
+hans_wlk3       3
+hans_wlk4       4
+
+hans_dth1       6
+hans_dth2       7
+hans_dth3       8
+
+$load   htlr_atk.lbm
+hitler_atk1     1
+hitler_atk2     2
+hitler_atk3     3
+hitler_sleep	5
+
+$load   htlr_wlk.lbm
+hitler_wlk1     1
+hitler_wlk2     2
+hitler_wlk3     3
+hitler_wlk4     4
+hitler_dth1     6
+hitler_dth2     7
+hitler_dth3     8
+
+$load   mbos_atk.lbm
+uber_atk1       1
+uber_atk2       2
+uber_atk3       3
+uber_atk4       4
+uber_sleep	5
+
+$load   mbos_wlk.lbm
+uber_wlk1       1
+uber_wlk2       2
+uber_wlk3       3
+uber_wlk4       4
+
+uber_dth1       6
+uber_dth2       7
+uber_dth3       8
+
+$load   mhit_atk.lbm
+mhitler_atk1    1
+mhitler_atk2    2
+mhitler_atk3    3
+
+mhitler_die1    5
+mhitler_die2    6
+mhitler_die3    7
+mhitler_die4    8
+
+$load   mhit_wlk.lbm
+mhitler_wlk1    1
+mhitler_wlk2    2
+mhitler_wlk3    3
+mhitler_wlk4    4
+        
+$load   mut_atk.lbm
+mutant_atk1     1
+mutant_atk2     2
+mutant_atk3     4
+mutant_sleep	5
+
+$load   mut_wlk.lbm
+mutant_wlk1     1
+mutant_wlk2     2
+mutant_wlk3     3
+mutant_wlk4     4
+mutant_pain     5
+
+mutant_dth1     6
+mutant_dth2     7
+mutant_dth3     8
+
+$load   of_atk.lbm
+officer_atk1    1
+officer_atk2    2
+officer_atk3    3
+officer_sleep	5
+
+$load   of_wlk.lbm
+officer_wlk1    1
+officer_wlk2    2
+officer_wlk3    3
+officer_wlk4    4
+officer_pain    5
+
+officer_dth1    6
+officer_dth2    7
+officer_dth3    8
+
+$load   shab_atk.lbm
+schabbs_atk1    1
+schabbs_atk2    2
+schabbs_sleep	5
+
+$load   shab_wlk.lbm
+schabbs_wlk1    1
+schabbs_wlk2    2
+schabbs_wlk3    3
+schabbs_wlk4    4
+
+schabbs_dth1    6
+schabbs_dth2    7
+schabbs_dth3    8
+
+$load   ss_atk.lbm
+ss_atk1         1      
+ss_atk2         2
+ss_atk3         3
+ss_sleep	5
+
+$load   ss_wlk.lbm
+ss_wlk1         1
+ss_wlk2         2
+ss_wlk3         3
+ss_wlk4         4
+ss_pain         5
+
+ss_dth1         6
+ss_dth2         7
+ss_dth3         8
+
+$load   trns_atk.lbm
+trans_atk1      1
+trans_atk2      2
+trans_atk3      3
+trans_sleep	5
+
+$load   trns_wlk.lbm
+trans_wlk1      1
+trans_wlk2      2
+trans_wlk3      3
+trans_wlk4      4
+
+trans_dth1      6
+trans_dth2      7
+trans_dth3      8
+
+$load   spr1v.lbm
+water_puddle    1
+green_barrel    2
+chair_table     3
+floor_lamp      4
+chandelier      5
+dog_food        6
+collumn         7
+potted_tree     8
+
+$load   spr2v.lbm
+flag            1
+potted_plant    2
+blue_pot        3
+debris1         4
+light           5
+bucket          6
+armour          7
+cage            8
+
+$load   spr3v.lbm
+g_key           1
+s_key           2
+bandolier       3
+ammocase        4
+food            5
+health          6
+ammo            7
+machinegun      8
+
+$load   spr4v.lbm
+chaingun        1
+cross           2
+chalice         3
+chest           4
+crown           5
+oneup           6
+wood_barrel     7
+water_well      8
+
+$load   spr5v.lbm
+flamethrower    1
+gascan          2
+launcher        3
+missiles        4
+map		5
+sleepz0		6
+sleepz1		7
+sleepz2		8
+
+
+

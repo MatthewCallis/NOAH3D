@@ -1,0 +1,51 @@
+;--------------------------------------------------------------------
+;			65816 STACK VARIABLE PASSING
+;--------------------------------------------------------------------
+
+
+;
+; * Stack builds DOWN
+;
+; * SP points to next AVAILABLE byte on stack (a pushed byte is placed
+;	at [SP], then SP is decremented...)
+;
+
+
+		LONGA	ON		;!
+
+;---------------------------------------------------------
+
+PROLOGUE	MACRO
+
+		tsc			;Get stack pointer in accumulator
+		phd			;Save direct page
+		tcd			;Make direct page point to stack
+
+		ENDM
+
+;---------------------------------------------------------
+; On entry:	DP+4 = 1st byte used by variables
+;		DP+3 = BANK of return address
+;		DP+2 = MSB of return address
+;		DP+1 = LSB of return address
+;		DP+0 = Next free byte on stack (*UNUSED*)
+;---------------------------------------------------------
+
+EPILOGUE	MACRO
+
+		lda	$02		;Get return addr BANK & MSB from DP
+		sta	$02+VARSIZE	;Store in DP/STACK at end of vars.
+		lda	$01		;Get return addr LSB (& MSB!) from DP
+		sta	$01+VARSIZE	;Store in DP/STACK at end of vars.
+
+		pld			;Restore direct page
+		tsc			;Get stack pointer in accumulator
+		clc
+		adc	#VARSIZE	;Skip to end of variables (last 3 bytes for RTL!)
+		tcs			;Set stack pointer for RTL
+		rtl			;Back to calling routine
+
+		ENDM
+
+;--------------------------------------------------------------------
+

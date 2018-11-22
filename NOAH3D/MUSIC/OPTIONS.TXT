@@ -1,0 +1,91 @@
+
+ Command line options for MID2SNES.
+ Usage: MID2SNES /option:value
+
+---------------------------------------------------------------------
+
+ time:V - Sets the output time constant to be V Hz. Defaults to 60Hz.
+
+---------------------------------------------------------------------
+
+ inst:BASE - Tells the converter to attempt to load instruments
+BASE000.INS through BASE255.INS (the first 128 corresponding to
+melodic instruments, the second 128 corresponding to drum notes
+played on channel 10).
+
+---------------------------------------------------------------------
+
+ map:FILE.MAP - Causes the converter to use FILE.MAP as its
+instrument map. See NORMAL.MAP for documentation on the .MAP
+format.
+
+---------------------------------------------------------------------
+
+ static:TRACK - Causes the converter to use the MIDI track number as
+the output voice number for events.
+
+ static:CHANNEL - Causes the converter to use the MIDI channel number
+as the output voice number for events. This mode corresponds to the
+way that MID2ID works.
+
+---------------------------------------------------------------------
+
+ dynamic - Causes the converter to use dynamic voice allocation mode,
+where each note can compete for any voice.
+
+ dynamic:FILE.CHM - Causes the converter to use FILE.CHM as its
+channel allocation map. See NORMAL.CHM for documentation on the .CHM
+format.
+
+---------------------------------------------------------------------
+
+ play:F - If F is 1, the converter will play back (in real time) the
+song being converted to an AdLib compatible FM chip. If this isn't
+specified, or /play:0 is used, the converter does its work as quickly
+as it can (useful for batch conversion).
+
+---------------------------------------------------------------------
+
+ voices:N - Sets the maximum number of voices used to N. Defaults
+to 8.
+
+---------------------------------------------------------------------
+
+ cut:F - Equivalent to /intra:F and /inter:F
+
+---------------------------------------------------------------------
+
+ intra:F - If F is 1 and the converter is in dynamic mode, it displays
+intra-channel note cutoffs (where a note from a particular channel cuts off
+a previously playing note from the same channel).
+
+---------------------------------------------------------------------
+
+ inter:F - If F is 1 and the converter is in dynamic mode, it displays
+inter-channel note cutoffs (where a note from a particular channel cuts off
+a previously playing note from a different channel). /inter:1 does NOT
+enable intra-channel note cutoff display.
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+ The following options only affect FM reference output:
+
+ bend:V - Sets the bend range, in semi-tones, for the FM playback.
+
+---------------------------------------------------------------------
+
+ vol:V - Sets the maximum velocity for notes, and scales all velocities
+accordingly. For example, if /vol:64 is used, all note velocities would be
+cut in half. Defaults to vol:128.
+
+---------------------------------------------------------------------
+
+ vmin:V
+ vmax:V
+ These two options allow further control over the velocities used for FM
+events. vmin specifies the minimum (non-zero) velocity for a note, and
+vmax specifies the maximum velocity for a note. For example, if
+/vmin:64 /vmax:96 is used, a note with an original velocity of 64 would
+end up with a velocity of 80 (because 64 corresponds to 0.5 volume, and
+80 is halfway between 64 and 96).

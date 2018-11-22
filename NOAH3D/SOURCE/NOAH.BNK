@@ -1,0 +1,11 @@
+
+Section: ORG:    ROM ORG:  SIZE:
+PAGE0    000000  ------       54H (    84)
+CODE     C00000  000000     DC32H ( 56370)
+DATA     7E1000  0FC000     2C4EH ( 11342)
+UDATA    7E3C4E  ------     C2B5H ( 49845)
+boot     C0FC00  00FC00      3BDH (   957)
+vectors  C0FFE0  00FFE0       20H (    32)
+primitiv C1F000  01F000      D3AH (  3386)
+Total                      1DCA0H (122016)
+

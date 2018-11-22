@@ -1,0 +1,108 @@
+char *mission1text[] = {
+	"You'll be out in six",
+	"days, Noah. Unfortunately,",
+	"the animals are a tad bit",
+	"restless and want to get",
+	"off the ark now. Good",
+	"thing you brought all that",
+	"food with you. You'll need",
+	"it to put the busy ones to.",
+	"sleep.",
+	"",
+	"At the end of the first",
+	"day, be prepared to deal,",
+	"with the camel. He's been",
+	"real cranky lately, and",
+	"is a bit out of control.",
+	"Good luck and be", 
+	"careful...",
+	"*"
+};
+
+char *mission2text[] = {
+	"Wow, Noah! That camel sure",
+	"was hard to calm down. But",
+	"remember, you were chosen",
+	"to guide this ark to",
+	"safety beacause you know",
+	"how to get the job done.",
+	"Your family and the other",
+	"animals are counting on",
+	"you.",
+	"",
+	"The closing of day two",
+	"ends with an irritable",
+	"giraffe. She may be tall,",
+	"and quick, but give her",
+	"enough food and it's off",
+	"to sleep. Oh, and Noah,",
+	"remember to keep an eye",
+	"out for hidden rooms...",
+	"*"
+};
+
+char *mission3text[] = {	   X
+	"ZZZZZ... Great job, Noah!.",
+	"The giraffe is snoring",
+	"Boy it seems the clean",
+	"animals never seem to",
+	"stay asleep very long.",
+	"",
+	"Keep your eyes out for",
+	"a monkey on the loose.",
+	"He can be pretty tricky",
+	"and may try distracting you",
+	"with coconuts, but it's your",
+        "job to get him settled down",
+	"for the rest of your time",
+	"aboard the ark.",
+	"*"
+};
+
+char *mission4text[] = {
+	"You're doing a great job,", 
+	"Noah! You took care of that",
+	"monkey like a real pro.",
+	"",
+	"I hope you haven't worn",
+	"yourself out yet, because",
+	"more challenges are ahead.",
+	"",
+	"An irritable kangaroo awaits",
+	"you, and she doesn't look the",
+	"least bit tired. Are you",
+	"ready for her? She needs to",
+	"rest like the other animals.",
+	"*"
+};
+
+char *mission5text[] = {
+	"Wow! That kangaroo was no",
+	"challenge for you!",
+	"Can you keep up the pace",
+	"when faced with a charging",
+	"elephant?",
+	"Don't worry, very soon you",
+	"you will be on dry land,",
+	"and you won't have to",
+	"chase the animals around the",
+	"ark anymore.",
+	"*"
+};
+
+char *mission6text[] = {
+	"You are almost there!",
+	"If you can get through one",
+	"more day, you will be out",
+	"of here for good!",
+	"",
+	"Rumor has it one of thes",
+	"bears does not want to be",
+	"found. In fact he may try to",
+	"hide from you. Be on the",
+	"alert for a crafty bear.",
+	"Get him to sleep and your",
+	"work is done!",
+	"*"
+};
+

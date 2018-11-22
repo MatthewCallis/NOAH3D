@@ -1,0 +1,272 @@
+
+
+ Id SNES music format notes.
+
+ Revision 5.
+
+----------------------------------------------------------------------------
+
+ Revision 1:
+	Created.
+
+ Revision 2:
+	Removed multi-voice indication, and revised code.
+
+ Revision 3:
+	Added instrument list, and revised code.
+
+ Revision 4:
+	Added percussive instrument handling, percussive note on, and revised
+   code.
+
+ Revision 5:
+	Added implicit bend removal on note off.
+	Added code indicating that a 0 time value byte should be handled as
+   256 ticks.
+	Updated relevant code.
+
+----------------------------------------------------------------------------
+
+ The song is stored as a stream of bytes, containing a list of the
+instruments used, followed by an arbitrary number of events. An event is
+comprised of an indication of how much time should pass until the next event,
+which voice the instruction should affect, an instruction, and optional
+instruction data.
+
+ The list of instruments is a single byte (indicating the number of
+instruments in the list), followed by one byte per instrument used.
+
+----------------------------------------------------------------------------
+
+Instruction format:
+ cccvvvtt
+
+ c - Command
+ v - Voice #
+ t - Time value
+
+----------------------------------------------------------------------------
+
+Values for t:
+ 00 - 0 ticks till next event
+ 01 - 1 tick till next event
+ 02 - 2 ticks till next event
+ 03 - Byte immediately following instruction contains number of ticks till
+	 next event.
+
+----------------------------------------------------------------------------
+
+ The voice number indicates which voice generator (normally 0-4) should be
+affected by the command.
+
+ This field is undefined for the loop/terminate command.
+
+----------------------------------------------------------------------------
+
+ Commands:
+ 0 - Null. Used to extend time between events to a value which won't fit in
+	a single byte.
+ 1 - Note on. Plays a note. Implies note off.
+ 2 - Note off. Turns off the voice.
+ 3 - Pitch bend. Alters the frequency of a voice.
+ 4 - Instrument reassign. Selects a particular instrument for the voice.
+	Implies note off.
+ 5 - Loop/terminate. Indicates the end of the song.
+ 6 - Percussive note on. Plays a percussive note. Implies note off.
+
+ Command data:
+ Null - none.
+
+ Note on - normal: The first 7 bits of the first byte indicate the MIDI
+				note number to play. If the 8th bit is set, there is a
+				second byte, which indicates the MIDI velocity that the
+				note should be played with. If the second byte isn't
+				present, use the previous velocity for the voice.
+ Note on - percussive: If the current instrument for the voice is a
+				percussive instrument (instruments 128-255), there is one
+				byte only, which specifies the velocity to be used.
+
+ Percussive note on - Plays a percussive note (this will only happen
+				when the current instrument for the voice is in the
+				range 128-255), using the previous velocity.
+
+ Note off - none.
+
+ Pitch bend - One byte indicating pitch bend for the voice. 0x80 is no
+			 bend, 0x00 is maximum bend down, and 0xff is maximum bend up.
+			 I assume that Robert will want a 2 semi-tone bend range.
+
+ Instrument reassign - One byte indicating which instrument should be used
+			 for this voice.
+
+ Loop/terminate - none.
+
+ NOTE: A note-off (either explicit or implicit) resets a voice's pitch bend
+	  to 0x80 (no bend).
+
+----------------------------------------------------------------------------
+
+/*
+	Sample decoding
+*/
+#define	MAXVOICES	5
+
+typedef	unsigned char		byte;
+typedef	enum {false,true}	boolean;
+
+			boolean	loopsong;
+volatile	boolean	songover;
+			byte	*sequencestart;
+volatile	byte	*sequence;
+			long	seqticks,seqnextevt;
+
+volatile	byte	curinst[MAXVOICES],
+					curbend[MAXVOICES],
+					curvel[MAXVOICES];
+
+void
+noteoff(byte voice)
+{
+	curbend[voice] = 0x80;
+	// ...
+}
+
+int
+docommand(byte voice,byte cmd)
+{
+	byte	vel,note;
+	int		length;
+
+	length = 0;
+	switch (cmd)
+	{
+	case 1:		// Note on
+		noteoff(voice);
+		if (curinst[voice] & 0x80)
+		{
+			curvel[voice] = sequence[length++];
+			noteonperc(voice,vel);
+		}
+		else
+		{
+			note = sequence[length++];
+			if (note & 0x80)
+			{
+				curvel[voice] = sequence[length++];
+				note &= 0x7f;
+			}
+			noteon(voice,note,vel);
+		}
+		break;
+	case 2:		// Note off
+		noteoff(voice);
+		break;
+	case 3:		// Pitch bend
+		curbend[voice] = sequence[length++];
+		pitchbend(voice);
+		break;
+	case 4:		// Instrument reassign
+		noteoff(voice);
+		curinst[voice] = sequence[length++];
+		break;
+	case 5:		// Loop or terminate
+		songover = true;
+		break;
+	case 6:		// Percussive note on
+		noteoff(voice);
+		noteonperc(voice,curvel[voice]);
+		break;
+	}
+	return(length);
+}
+
+void
+isr(void)
+{
+	// While there are events to process ...
+	while (sequence && (seqticks >= seqnextevt))
+	{
+		byte	value,voice;
+		int		i,length;
+
+		// Compute time till next event
+		value = *sequence++;
+		if ((value & 3) == 3)
+		{
+			unsigned v = *sequence++;
+			if (!v)
+				v = 0x100;
+			seqnextevt += v;
+		}
+		else
+			seqnextevt += value & 3;
+
+		// Determine which voice should be affected by this command
+		voice = (value >> 2) & 7;
+		length = docommand(voice,value >> 5);
+
+		// Adjust pointer to next instruction
+		sequence += length;
+
+		// If the song's now over ...
+		if (songover)
+		{
+			// If we should loop the song ...
+			if (loopsong)
+			{
+				// Reset counters
+				seqticks = 0;
+				seqnextevent = 0;
+				// Reset pointer to the beginning of the song
+				sequence = sequencestart;
+				songover = false;
+			}
+			else
+				sequence = nil;	// Otherwise, kill it
+		}
+	}
+
+	// Bump time counter
+	seqticks++;
+}
+
+void
+stopsong(void)
+{
+	int	i;
+
+	disableints();
+	sequence = nil;
+	enableints();
+
+	for (i = 0;i < MAXVOICES;i++)
+		noteoff(i);
+}
+
+void
+startsong(byte *song,boolean loops)
+{
+	int		i,
+			numinsts;
+
+	stopsong();
+
+	for (i = 0;i < MAXVOICES;i++)
+	{
+		curbend[i] = 0x80;
+		curvel[i] = 0;
+		curinst[i] = 0;
+	}
+
+	numinsts = *song++;
+	for (i = 0;i < numinsts;i++)
+		loadinstrument(*song++);
+
+	disableints();
+	sequence = song;
+	sequencestart = song;
+	songloops = loops;
+	seqticks = 0;
+	seqnextevt = 0;
+	enableints();
+}

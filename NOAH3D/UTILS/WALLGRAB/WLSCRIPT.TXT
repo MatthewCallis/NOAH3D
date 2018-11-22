@@ -1,0 +1,2 @@
+walls1.lbm	40
+walls2.lbm	29

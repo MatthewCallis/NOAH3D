@@ -1,0 +1,26 @@
+File INTERMIS.C:
+
+        StartSong (4,true);	// Level completed
+
+        StartSong (6,true);	// Game completed
+
+        StartSong (10, true);	// Credit screen
+
+File WOLFMAIN.C:
+
+        StartSong (mapmusic[gamestate.mapon],true);     // Start the music
+
+File SNESMAIN.C:
+
+        StartSong (0, true);	// Title screen
+
+        StartSong (0, true);	// Menu screen
+
+        StartSong (6,true);	// Briefing (text screens)
+
+        StartSong (6,true);	// Briefing (text screens)
+
+File INTRO.C:
+
+        StartSong (0,true);	// Intro (not used!)
+

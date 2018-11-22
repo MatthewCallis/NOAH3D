@@ -1,0 +1,203 @@
+**************************
+* SFX HARDWARE REGISTERS
+**************************
+
+*** PPU REGISTERS ***
+
+INIDISP		set	$2100	;INITIAL SETTINGS for screen
+OBJSEL		set	$2101	;OBJECT SIZE & AREA DESIGNATION
+OAMADD		set	$2102	;Address for ACCESSING OAM
+OAMADDL		set	$2102
+OAMADDH		set	$2103
+OAMDATAW	set	$2104	;DATA for OAM WRITE
+BGMODE		set	$2105	;BG mode & CHARACTER SETTINGS
+MOSAIC		set	$2106	;SIZE & screen DESIGNATION for MOSAIC
+BG1SC		set	$2107	;Address for BG1 screen DATA & SIZE
+BG2SC		set	$2108	;Address for BG2 screen DATA & SIZE
+BG3SC		set	$2109	;Address for BG3 screen DATA & SIZE
+BG4SC		set	$210A	;Address for BG4 screen DATA & SIZE
+BG12NBA		set	$210B	;BG1&2 CHARACTER NAME BASE Address
+BG34NBA		set	$210C	;BG3&4 CHARACTER NAME BASE Address
+BG1HOFS		set	$210D	;Horizontal offset for BG1
+BG1VOFS		set	$210E	;Vertical offset for BG1
+BG2HOFS		set	$210F	;Horizontal offset for BG2
+BG2VOFS		set	$2110	;Vertical offset for BG2
+BG3HOFS		set	$2111	;Horizontal offset for BG3
+BG3VOFS		set	$2112	;Vertical offset for BG3
+BG4HOFS		set	$2113	;Horizontal offset for BG4
+BG4VOFS		set	$2114	;Vertical offset for BG4
+VMAINC		set	$2115	;VRAM Address INCREMENT DESIGNATOR
+VMADD		set	$2116	;Address for ACCESSING VRAM
+VMADDL		set	$2116
+VMADDH		set	$2117
+VMDATAW		set	$2118	;DATA for VRAM WRITE
+VMDATAL		set	$2118
+VMDATAH		set	$2119
+M7SEL		set	$211A	;INITIAL SETTINGS for mode-7
+M7A		set	$211B	;MATRIX PARAMETER A
+M7B		set	$211C	;MATRIX PARAMETER B
+M7C		set	$211D	;MATRIX PARAMETER C
+M7D		set	$211E	;MATRIX PARAMETER D
+M7X		set	$211F	;CENTER POSITION X
+M7Y		set	$2120	;CENTER POSITION Y
+CGADD		set	$2121	;Address for CG-RAM WRITE
+CGDATAW		set	$2122	;DATA for CG-RAM WRITE
+W12SEL		set	$2123	;Window SETTINGS for BG1&2
+W34SEL		set	$2124	;Window SETTINGS for BG3&4
+WOBJSEL		set	$2125	;Window SETTINGS for COLOR & OBJECT
+WH0		set	$2126	;Window 1 LEFT POSITION
+WH1		set	$2127	;Window 1 RIGHT POSITION
+WH2		set	$2128	;Window 2 LEFT POSITION
+WH3		set	$2129	;Window 2 RIGHT POSITION
+WBGLOG		set	$212A	;Window LOGIC for BG1,2,3,4
+WOBJLOG		set	$212B	;Window LOGIC for COLOR & OBJECT
+TM		set	$212C	;MAIN screen DESIGNATOR
+TS		set	$212D	;SUB screen DESIGNATOR
+TMW		set	$212E	;MAIN screen Window MASK DESIGNATOR
+TSW		set	$212F	;SUB screen Window MASK DESIGNATOR
+CGSWSEL		set	$2130	;SETTINGS for COLOR ADDITION
+CGADSUB		set	$2131	;ADD/SUB DESIGNATOR for EACH BG
+COLDATA		set	$2132	;FIXED COLOR for ADD/SUB
+SETINI		set	$2133	;screen INITIAL SETTING
+MPYL		set	$2134	;MULT RESULT LOW
+MPYM		set	$2135	;MULT RESULT MEDIUM
+MPYH		set	$2136	;MULT RESULT HIGH
+SLHV		set	$2137	;LATCH for H/V COUNTER
+OAMDATAR	set	$2138	;DATA FROM OAM READ
+VMDATAR		set	$2139	;DATA FROM VRAM READ
+VMDATALR	set	$2139
+VMDATAHR	set	$213A
+CGDATAR		set	$213B	;DATA FROM CG-RAM READ
+OPHCT		set	$213C	;Horizontal COUNTER
+OPVCT		set	$213D	;Vertical COUNTER
+STAT77		set	$213E	;PPU STATUS FLAG & VERSION
+STAT78		set	$213F	;PPU STATUS FLAG & VERSION
+APUIO0		set	$2140	;APU IO PORTS
+APUIO1		set	$2141
+APUIO2		set	$2142
+APUIO3		set	$2143
+SPC700Port1 	set	$2140
+SPC700Port2 	set	$2141
+SPC700Port3 	set	$2142
+SPC700Port4 	set	$2143
+
+WMDATA      	set	$2180
+WMADD       	set	$2181
+WMBANK      	set	$2183
+
+*** CPU REGISTERS ***
+
+NMITIMEN	set	$4200	;FLAG for VBLANK,TIMERS,& JOY-C
+WRIO		set	$4201	;PROGRAMMABLE IO PORT
+MULTA		set	$4202	;MULTIPLICAND-A
+MULTB		set	$4203	;MULTIPLIER-B
+WRDIVD		set	$4204	;DIVIDEND-C
+WRDIVL		set	$4204
+WRDIVH		set	$4205
+WRDIVB		set	$4206	;DIVISOR-B
+HTIME		set	$4207	;Horizontal COUNT TIMER SETTINGS
+HTIMEL		set	$4207
+HTIMEH		set	$4208
+VTIME		set	$4209	;Vertical COUNT TIMER SETTINGS
+VTIMEL		set	$4209
+VTIMEH		set	$420A
+MDMAEN		set	$420B	;GENERAL DMA ENABLE & TRIGGER
+HDMAEN		set	$420C	;Horizontal DMA ENABLE
+MEMSEL		set	$420D	;CPU Speed control
+
+RDNMI		set	$4210	;NMI STATUS REG
+TIMEUP		set	$4211	;TIMER IRQ STATUS
+HVBJOY		set	$4212	;HBLANK,VBLANK,JOY-C ENABLE
+RDIO		set	$4213	; programmable I/O port
+RDDIVL		set	$4214	; quotient of divide result low
+RDDIVH		set	$4215	; quotient of divide result high
+PRODC		set	$4216
+RDMPYH		set	$4217	; product of mult/remainder of div hi
+JOY1		set	$4218	;JOYPAD1
+JOY1L		set	$4218
+JOY1H		set	$4219
+JOY2		set	$421A	;JOYPAD2
+JOY2L		set	$421A
+JOY2H		set	$421B
+
+*** DMA registers ***
+
+DMA0PARMS   	set	$4300	;DMA parameter settings
+DMA0PORT	set	$4301	;0021xx where xx is port# of B-bus
+DMA0ADDR	set	$4302	;Address on A-bus
+DMA0ADDRL	set	$4302
+DMA0ADDRH	set	$4303
+DMA0BANK	set	$4304	;Bank of A-data bus
+DMA0LEN     	set	$4305
+DMA0LENL    	set	$4305
+DMA0LENH    	set	$4306
+
+DMA1PARMS	set	$4310	;DMA parameter settings
+DMA1PORT	set	$4311	;0021xx where xx is port# of B-bus
+DMA1ADDR	set	$4312	;Address on A-bus
+DMA1ADDRL	set	$4312
+DMA1ADDRH	set	$4313
+DMA1BANK	set	$4314	;Bank of A-data bus
+
+DMA2PARMS	set	$4320	;DMA parameter settings
+DMA2PORT	set	$4321	;0021xx where xx is port# of B-bus
+DMA2ADDR	set	$4322	;Address on A-bus
+DMA2ADDRL	set	$4322
+DMA2ADDRH	set	$4323
+DMA2BANK	set	$4324	;bank of a-data bus
+
+DMA3PARMS	set	$4330	;DMA parameter settings
+DMA3PORT	set	$4331	;0021xx where xx is port# of B-bus
+DMA3ADDR	set	$4332	;Address on A-bus
+DMA3ADDRL	set	$4332
+DMA3ADDRH	set	$4333
+DMA3BANK	set	$4334	;Bank of A-data bus
+
+DMA4PARMS	set	$4340	;DMA parameter settings
+DMA4PORT	set	$4341	;0021xx where xx is port# of B-bus
+DMA4ADDR	set	$4342	;Address on A-bus
+DMA4ADDRL	set	$4342
+DMA4ADDRH	set	$4343
+DMA4BANK	set	$4344	;Bank of A-data bus
+
+DMA5PARMS	set	$4350	;DMA parameter settings
+DMA5PORT	set	$4351	;0021xx where xx is port# of B-bus
+DMA5ADDR	set	$4352	;Address on A-bus
+DMA5ADDRL	set	$4352
+DMA5ADDRH	set	$4353
+DMA5BANK	set	$4354	;Bank of A-data bus
+
+DMA6PARMS	set	$4360	;DMA parameter settings
+DMA6PORT	set	$4361	;0021xx where xx is port# of B-bus
+DMA6ADDR	set	$4362	;Address on A-bus
+DMA6ADDRL	set	$4362
+DMA6ADDRH	set	$4363
+DMA6BANK	set	$4364	;Bank of A-data bus
+
+DMA7PARMS	set	$4370	;DMA parameter settings
+DMA7PORT	set	$4371	;0021xx where xx is port# of B-bus
+DMA7ADDR	set	$4372	;Address on A-bus
+DMA7ADDRL	set	$4372
+DMA7ADDRH	set	$4373
+DMA7BANK	set	$4374	;Bank of A-data bus
+
+*** Joypad masks ***
+
+JOYPAD_B	set	%1000000000000000
+JOYPAD_Y	set	%0100000000000000
+JOYPAD_SELECT	set	%0010000000000000
+JOYPAD_START	set	%0001000000000000
+JOYPAD_UP	set	%0000100000000000
+JOYPAD_DN	set	%0000010000000000
+JOYPAD_LFT	set	%0000001000000000
+JOYPAD_RGT	set	%0000000100000000
+JOYPAD_A	set	%0000000010000000
+JOYPAD_X	set	%0000000001000000
+JOYPAD_TL	set	%0000000000100000
+JOYPAD_TR	set	%0000000000010000
+
+*** memory map ***
+
+RAM_BANK	set	$7E0000	;BANK $7E, $0000-7FFF	set RAM in SFX
+
+
